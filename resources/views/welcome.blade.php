@@ -1,100 +1,243 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+@extends('layouts.app')
+@section('content')
+    <!-- Start your project here-->
+    <div class="content">
+           
+                <!-- Jumbotron -->
+        <div class="card card-image" style="background-image: url({{ asset('data_file/reasonsAirdropsFlop.jpeg')}});">
+            
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+          <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+            <div class="py-5">
+        
+              <!-- Content -->
+              
+              <h2 class="card-title h2 my-4 py-2">Welcome to {{ config('app.name') }}</h2>
+              <p class="mb-4 pb-2 px-md-5 mx-md-5">Welcome to {{ config('app.name') }}.biz, a free source that presents the world’s most current and legitimate cryptocurrency airdrops. We verify and aggregate airdrops and bounties daily to bring you the most recent and profitable earning opportunities. Choose an airdrop and follow the instructions provided to claim free crypto tokens, or vote for your favorite projects!</p>
+              
             </div>
+          </div>
         </div>
-    </body>
-</html>
+        <!-- Jumbotron -->
+        
+        @include('includes.corsel')
+        <hr>
+        <div class="container-fluid">
+            <h3 class=" h4 my-4 py-2 ">Latest Airdrop</h3>
+            
+                
+                <div class="row row-cols-1 row-cols-md-2">
+                  @foreach($postal as $postall)  
+                  <div class="col mb-4">
+                      <a href="{{url('/'.$postall->slug)}}" class="text-dark">
+                    <!-- Card -->
+                    <div class="card promoting-card">
+                        
+                        <div class="card-body d-flex flex-row">
+                        <!-- Avatar -->
+                            <img src="{{url('/data_file/'.$postall->images)}}" class="rounded-circle mr-3" height="100px" width="100px" alt="avatar">
+                        
+                            <!-- Content -->
+                            <div>
+                        <p class="justify-content-end mb-0">
+                        <?php 
+                            if (empty($postall->status)) {
+                                echo "<span class='badge badge-danger'>Ended</span>";
+                            }else {
+                                echo "<span class='badge badge-success'>Running</span>";
+                            }
+                        ?>
+                        </p>
+                              <!-- Title -->
+                              
+                              <h4 class="card-title font-weight-bold mb-2 mt-2">{{$postall->name}}</h4>
+                              <!-- Subtitle -->
+                              
+                                <p class="card-text mb-0">
+                                   @php 
+                                        if (empty($postall->kyc)) {
+                                         
+                                        }else {
+                                            echo "<i class='fa fa-id-card pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->fb)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-facebook-f pr-2'></i>";
+                                        }
+                                        if (empty($postall->email)) {
+                                            
+                                        }else {
+                                            echo "<i class='fas fa-envelope pr-2'></i>";
+                                        }
+                                        if (empty($postall->tw)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-twitter pr-2'></i>";
+                                        }
+                                        if (empty($postall->tg)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-telegram-plane pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->discord)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-discord pr-2'></i>";
+                                        }
+                                        if (empty($postall->medium)) {
+                                            
+                                        }else {
+                                            echo "<i class='fa fa-medium pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->phone)) {
+                                            
+                                        }else {
+                                            echo " <i class='fa fa-phone pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->reddit)) {
+                                            
+                                        }else {
+                                            echo "<i class='fa fa-reddit pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->youtube)) {
+                                            
+                                        }else {
+                                            echo "<i class='fa fa-youtube-play pr-2' aria-hidden='true'></i>";
+                                        }
+                                @endphp        
+                                </p>
+                              <p class="card-text">
+                                  <i class="fa fa-money-bill pr-2"></i> ${{$postall->est_value}}
+                                  </p>
+                        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card -->
+                      </a>
+    
+                  </div>
+                  @endforeach
+                </div>
+                {{ $postal->links('vendor.pagination.bootstrap-4') }}
+            
+            <hr>
+
+            <h3 class=" h4 my-4 py-2 ">Mistery Value Airdrop</h3>
+            
+                
+                <div class="row row-cols-1 row-cols-md-2">
+                  @foreach($big as $postall)  
+                  <div class="col mb-4">
+                      <a href="{{url('/'.$postall->slug)}}" class="text-dark">
+                    <!-- Card -->
+                    <div class="card promoting-card">
+                        
+                        <div class="card-body d-flex flex-row">
+                        <!-- Avatar -->
+                            <img src="{{url('/data_file/'.$postall->images)}}" class="rounded-circle mr-3" height="100px" width="100px" alt="avatar">
+                        
+                            <!-- Content -->
+                            <div>
+                        <p class="justify-content-end mb-0">
+                        <?php 
+                            if (empty($postall->status)) {
+                                echo "<span class='badge badge-s
+                                danger'>Ended</span>";
+                            }else {
+                                echo "<span class='badge badge-success'>Running</span>";
+                            }
+                        ?>
+                        </p>
+                              <!-- Title -->
+                              
+                              <h4 class="card-title font-weight-bold mb-2 mt-2">{{$postall->name}}</h4>
+                              <!-- Subtitle -->
+                              
+                                <p class="card-text mb-0">
+                                   @php 
+                                        if (empty($postall->kyc)) {
+                                         
+                                        }else {
+                                            echo "<i class='fa fa-id-card pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->fb)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-facebook-f pr-2'></i>";
+                                        }
+                                        if (empty($postall->email)) {
+                                            
+                                        }else {
+                                            echo "<i class='fas fa-envelope pr-2'></i>";
+                                        }
+                                        if (empty($postall->tw)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-twitter pr-2'></i>";
+                                        }
+                                        if (empty($postall->tg)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-telegram-plane pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->discord)) {
+                                            
+                                        }else {
+                                            echo "<i class='fab fa-discord pr-2'></i>";
+                                        }
+                                        if (empty($postall->medium)) {
+                                            
+                                        }else {
+                                            echo "<i class='fa fa-medium pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->phone)) {
+                                            
+                                        }else {
+                                            echo " <i class='fa fa-phone pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->reddit)) {
+                                            
+                                        }else {
+                                            echo "<i class='fa fa-reddit pr-2' aria-hidden='true'></i>";
+                                        }
+                                        if (empty($postall->youtube)) {
+                                            
+                                        }else {
+                                            echo "<i class='fa fa-youtube-play pr-2' aria-hidden='true'></i>";
+                                        }
+                                @endphp        
+                                </p>
+                              <p class="card-text">
+                                  <i class="fa fa-money-bill pr-2"></i> ${{$postall->est_value}}
+                                  </p>
+                        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card -->
+                      </a>
+    
+                  </div>
+                  @endforeach
+                </div>
+                {{ $big->links('vendor.pagination.bootstrap-4') }}
+            
+            <hr>
+        </div>
+        <div class=" d-flex flex-row justify-content-center mb-4">
+
+            <!-- Form -->
+            <form class="form-inline justify-content-center">
+              <input type="email" class="form-control" placeholder="Subscribe">
+              <button class="btn btn-primary btn-sm">submit</button>
+            </form>
+            <!-- Form -->
+        </div>
+        
+    </div>
+    <!-- End your project here-->
+    
+@endsection
